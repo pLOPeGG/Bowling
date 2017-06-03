@@ -1,4 +1,4 @@
-function [ penetration, dir_contact ] = collisionBoule_Segment_Quille( pos_b, r_b, pos_p, pos_q)
+function [ penetration, dir_contact, delta_proj ] = collisionBoule_Segment_Quille( pos_b, r_b, pos_p, pos_q)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 % Version courte de calcul de collision cylindre-cylindre
