@@ -48,8 +48,9 @@ yG = 0.146 ;                %position centre gravité (d'après caractéristiques t
 
 
 %   Points pour la forme de la quille 
-x_pos_quille = [0 1 4 6 9 12 14 16 18 20 22 24 26 29 32 34 36 38 39 40];
-y_pos_quille = 0.0005*[43 64 97.5 107.1 110 106.9 102.4 96.2 88.7 79.9 70.6 62.3 55.9 51.4 61.1 76.5 84.6 76.1 61.9 0];
+
+x_pos_quille=[0 1.905 5.715  9 12 14 16 18.415  20 22 24 26 29 29.845 32.068 34.29 36 38 39 40];
+y_pos_quille=0.005*[4.3 7.183 9.921 11.0 10.69 10.24 9.62 8.87 7.99 7.06 6.23 5.59 5.14 5.319 6.111 6.469 6.4 5.85 5 0];
 x_quille = 0:0.5:40;
 y_quille = spline(x_pos_quille,y_pos_quille,x_quille);
 
