@@ -110,6 +110,10 @@ end
 peneQ_B = zeros(1,2*Nb_q);                %vecteur de penetration de la boule dans les quilles
 dirContactQ_B = zeros(3,2*Nb_q);          %Matrice des directions du contact entre la boule et les quilles 
 
+peneQ_Q= zeros(1,2*Nb_q);                %vecteur de penetration des quilles dans les quilles
+dirContactQ_Q = zeros(3,2*Nb_q);          %Matrice des directions du contact entre les quilles 
+distBase=zeros(1,2*Nb_q);
+
 MatrixElasticForceQuilles = zeros(2*Nb_q, 2*Nb_q, 3);       %matrice des efforts exercés d'une quille sur une autre : la valeur (i,j) indique la force exercée par i sur j
                                                             %c'est une matrice "antisymétrique" (termes symétriques opposés), uniquement des 0 sur la diagonale
                                                             %les N_q premières sont les boules du bas, les N_q secondes en haut
@@ -163,7 +167,22 @@ for i=1:N-1
         end
     end
         
-
+    %%% Collision boule de quille - segment de quille A FAIRE
+%     
+%     for j=1:2*Nb_q
+%         for k=1:Nb_q
+%             if(mod(j,Nb_q)~= k*(k<Nb_q) )
+%                 %calcul
+%                 r_j = (j<Nb_q+1)*R_bas_q + ~(j<Nb_q+1)*R_haut_q;
+%                 [peneQ_Q(j), dirContactQ_Q(:,j), distBase(j)] = collisionBoule_Segment_Quille(Prev_X_q(:,j), r_j, Prev_X_q(:, k), Prev_X_q(:, k+Nb_q));
+%                 elasticForceQuille(j,:) = elasticForceQuille(j,:) + peneQ_Q(j) * dirContactQ_Q(:,j)';
+%                 elasticForceQuille(k,:) = elasticForceQuille(k,:) - peneQ_Q(j) * dirContactQ_Q(:,j)' * (distBase(j)/l_0);
+%                 elasticForceQuille(k+Nb_q,:) = elasticForceQuille(k+Nb_q,:) - peneQ_Q(j) * dirContactQ_Q(:,j)' * (1-distBase(j)/l_0);
+%             end
+%             
+%         end
+%         
+%     end
     %
     
     
@@ -234,39 +253,3 @@ title('Evolution de l''énergie mécanique du système {boule + quilles} au cours d
 xlabel('Temps(s)'); 
 ylabel('Ec(J)');
 
-
-
-figure('units','normalized','outerposition',[0 0 1 1])
-
-for i=1:pas_Affichage:N
-    DrawBall(X_b(:,i), R_b);
-    hold on
-    for j=1:Nb_q
-        %DrawCylinder(X_q(:,i,j),Dir_q(:,i,j));
-        DrawCylinderDebug(X_q(:,i,j), X_q(:,i,j+Nb_q));
-    end
-    
-    xlim([0 25]);
-    ylim([-12 12]);
-    zlim([0 25]);
-
-   
-    set(gca, 'CameraPosition', [10, 4, 5]);
-    set(gca, 'CameraTarget', [18.1,0,0]);
-    camzoom(15);
-%%% Pour la vue en 3D
-%     if(X_b(1,i)<17)
-%         set(gca, 'CameraPosition', [X_b(1,i)-8, 0, 5]);
-%         set(gca, 'CameraTarget', [X_b(1,i), 0, 0]);
-%     else
-%         set(gca, 'CameraPosition', [10, 0, 5]);
-%         set(gca, 'CameraTarget', [17, 0, 0]);
-%         set(gca, 'CameraUpVector', [0, 0, 1]);
-%     end
-%   
-%     camzoom(15);
-%     
-    hold off
-   
-    drawnow;
-end

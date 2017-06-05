@@ -5,8 +5,8 @@ function [ penetration, dir_contact, delta_proj ] = collisionBoule_Segment_Quill
 
 global R_bas_q R_haut_q 
 
-if(norm(pos_b-pos_p + pos_b-pos_b) - R_bas_q - R_haut_q < norm(pos_p - pos_q))
-    dir_q = (pos_p-pos_q)/norm(pos_p-pos_q);
+if(norm(pos_b-pos_p) + norm(pos_b-pos_b) - R_bas_q - R_haut_q < norm(pos_q - pos_p))
+    dir_q = (pos_q-pos_p)/norm(pos_q-pos_p);
     delta_proj = (pos_b-pos_q)'*dir_q;
     proj=pos_q+delta_proj*dir_q;
 
@@ -20,5 +20,9 @@ if(norm(pos_b-pos_p + pos_b-pos_b) - R_bas_q - R_haut_q < norm(pos_p - pos_q))
 
     end
 
+else
+    penetration = 0;
+    dir_contact = [1 0 0];
+    delta_proj =0;
 end
 

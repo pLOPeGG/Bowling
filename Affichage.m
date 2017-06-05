@@ -1,6 +1,6 @@
 figure('units','normalized','outerposition',[0 0 1 1])
 
-for i=1:pas_Affichage:N
+for i=3000:pas_Affichage/2:N
     DrawBall(X_b(:,i), R_b);
     hold on
     for j=1:Nb_q
@@ -17,7 +17,7 @@ for i=1:pas_Affichage:N
 %     set(gca, 'CameraTarget', [18.1,0,0]);
 %     camzoom(15);
    %% Focus boules
-    if(X_b(1,i)<17)
+    if(X_b(1,i)<17) 
         set(gca, 'CameraPosition', [X_b(1,i)-8, 0, 5]);
         set(gca, 'CameraTarget', [X_b(1,i), 0, 0]);
     else
