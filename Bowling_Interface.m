@@ -1,7 +1,11 @@
-function  [] = Bowling_Interface(V_0, alpha, Y_0 )
+function  [] = Bowling_Interface(N, init_values, time )
 
+V_0 = init_values(1);
+alpha = init_values(2);
+Y_0 = init_values(3);
 
-
+t_init = time(1);
+t_tot = time(2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         Pour modifier les conditions initiales        %
 %                 aller à la ligne 79                   %
@@ -9,7 +13,7 @@ function  [] = Bowling_Interface(V_0, alpha, Y_0 )
 %   d'images affichées par secondes ligne 55            %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global dt y_quille R_b R_bas_q R_haut_q l_0 H_q  L l distInterQuille Nb_q
+global dt y_quille R_b R_q R_bas_q R_haut_q l_0 H_q  L l distInterQuille Nb_q X_b X_q Dir_q
 
 %% Données Générales
 g = 9.78033;             %accélération de pesanteur (m/s^2)
@@ -37,13 +41,13 @@ J_b = 0.4*M_b*R_b^2;        %moment d'inertie de la boule
 
 %%%Quille
 
-Nb_q = 10;                  %nombre de quilles sur le terrain
+% Nb_q = 10;                  %nombre de quilles sur le terrain
 M_q=1.4;                    %masse de la quille (kg)
 M_bas_q = 2*M_q/3;          %masse de la boule inférieure (kg)
 M_haut_q = M_q/3;           %masse de la boule supérieure (kg)
-R_q=0.055;                  %rayon de la quille (m) dans le cadre d'une approximation par un cylindre
-R_bas_q=R_q;                %rayon de la boule inférieure (m)
-R_haut_q=3*R_q/4;           %rayon de la boule supérieure (m)
+% R_q=0.055;                  %rayon de la quille (m) dans le cadre d'une approximation par un cylindre
+% R_bas_q=R_q;                %rayon de la boule inférieure (m)
+% R_haut_q=3*R_q/4;           %rayon de la boule supérieure (m)
 H_q=0.7;                    %hauteur d la quille (m)
 l_0=M_haut_q*g/k_intra_Quille + H_q-R_bas_q-R_haut_q;    %longueur à vide du ressort inter-boule(m) calculée pour qu'avec la boule dessus, la hauteur soit de H_q
 J_q=M_q*(3*R_q^2+H_q^2)/12; %moment d'inertie de la quille au centre (approximée par un cylindre)
@@ -64,9 +68,9 @@ y_quille = spline(x_pos_quille,y_pos_quille,x_quille);
 
 %% Variables d'intégration
 %%%Temporel
-N=1e4;                          %Nb intégrations
-t_init=0;                       %temps de début de simulation (s)
-t_tot=3;                        %temps de fin de simulation (s)
+%N=1e4;                          %Nb intégrations
+% t_init=0;                       %temps de début de simulation (s)
+% t_tot=4;                        %temps de fin de simulation (s)
 dt=(t_tot-t_init)/N;            %pas de temps (s)
 t=linspace(t_init,t_tot,N);     %vecteur des instants calculés
 

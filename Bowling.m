@@ -1,3 +1,5 @@
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         Pour modifier les conditions initiales        %
 %                 aller à la ligne 79                   %
@@ -6,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 close all;
-global dt y_quille R_b R_bas_q R_haut_q l_0 H_q  L l distInterQuille Nb_q
+global dt y_quille R_b R_q R_bas_q R_haut_q l_0 H_q  L l distInterQuille Nb_q
 
 %% Données Générales
 g = 9.78033;             %accélération de pesanteur (m/s^2)
@@ -86,8 +88,8 @@ X_b=zeros(3,N);     %position X,Y,Z
 
 %%%Init Boule
 V_0=15;                 %vitesse initale (m/s)
-alpha=0.05;             %angle d'attaque initial (rad)
-Y_0=-0.7;               %positionnement initial sur la piste [-1;1] (m)
+alpha=0.00;             %angle d'attaque initial (rad)
+Y_0=-0.007;               %positionnement initial sur la piste [-1;1] (m)
 
 %%% Conditions initiales
 V_b(:,1)=[V_0*cos(alpha),V_0*sin(alpha),0];

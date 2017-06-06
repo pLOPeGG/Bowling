@@ -1,4 +1,7 @@
 function varargout = Interface(varargin)
+
+
+
 % INTERFACE MATLAB code for Interface.fig
 %      INTERFACE, by itself, creates a new INTERFACE or raises the existing
 %      singleton*.
@@ -109,7 +112,7 @@ function slider_angle_Callback(hObject, eventdata, handles)
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 value = get(hObject,'Value');
 str_value = num2str(value);
-disp = strcat(str_value,' °');
+disp = strcat(str_value,' rad');
 set(handles.text_angle,'String', disp);
 
 
@@ -154,11 +157,28 @@ end
 
 % --- Executes on button press in button_process.
 function button_process_Callback(hObject, eventdata, handles)
+
+global R_b R_bas_q R_haut_q R_q Nb_q
+
 % hObject    handle to button_process (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 speed = get(handles.slider_speed, 'Value');
 angle = get(handles.slider_angle, 'Value');
 offset = get(handles.slider_offset, 'Value');
-Bowling_Interface(speed, angle, offset);
-Affichage;
+
+Nb_q = 10;
+
+N = 1e4;
+time = [0, 4];
+Nb_images_per_sec = 120;
+
+R_q=0.055;                  %rayon de la quille (m) dans le cadre d'une approximation par un cylindre
+R_bas_q=R_q;                %rayon de la boule inférieure (m)
+R_haut_q=3*R_q/4;           %rayon de la boule supérieure (m)
+
+R_b=0.15;                   %rayon boule (m)
+
+Bowling_Interface(N, [speed, angle, offset], time);
+
+Affichage_Interface(handles.axes_bowling, N, Nb_images_per_sec, time);
