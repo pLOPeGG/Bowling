@@ -1,12 +1,11 @@
-function [] = Affichage_Interface(handles, N, imagesPerSec, time)
+function [] = Affichage_Interface( N, imagesPerSec)
 
-global Nb_q X_q Dir_q X_b R_b
+global Nb_q X_q Dir_q X_b R_b t_tot
 
-Nb_images = imagesPerSec * (time(2) - time(1));      %nombre d'images au total
+Nb_images = imagesPerSec * t_tot;      %nombre d'images au total
 pas_Affichage = floor(N/Nb_images)+1;             %pas d'iteration lors de l'affichage de la simulation
 
-
- axes(handles.axes_bowling);
+h = figure('units','normalized','outerposition',[0 0 1 1]);
  
 for i=3000:pas_Affichage:N
    
@@ -20,7 +19,6 @@ for i=3000:pas_Affichage:N
     xlim([0 25]);
     ylim([-12 12]);
     zlim([0 25]);
-
    %% Focus sur les quilles
 %     set(gca, 'CameraPosition', [10, 4, 5]);
 %     set(gca, 'CameraTarget', [18.1,0,0]);
