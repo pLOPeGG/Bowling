@@ -1,11 +1,9 @@
-function  [] = Bowling_Interface(N, init_values, time )
+function  [] = Bowling_Interface(N, init_values )
 
 V_0 = init_values(1);
 alpha = init_values(2);
 Y_0 = init_values(3);
 
-t_init = time(1);
-t_tot = time(2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         Pour modifier les conditions initiales        %
 %                 aller à la ligne 79                   %
@@ -13,7 +11,7 @@ t_tot = time(2);
 %   d'images affichées par secondes ligne 55            %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global dt y_quille R_b R_q R_bas_q R_haut_q l_0 H_q  L l distInterQuille Nb_q X_b X_q Dir_q
+global dt y_quille R_b R_q R_bas_q R_haut_q l_0 H_q  L l distInterQuille Nb_q X_b X_q Dir_q t_tot
 
 %% Données Générales
 g = 9.78033;             %accélération de pesanteur (m/s^2)
@@ -24,7 +22,7 @@ L=18;                    %longueur piste (m)
 l=2;                     %largeur piste (m)
 distInterQuille=0.3;     %distance entre 2 quilles côtes à côtes (m)
 f_boule = 0.19;                %coeff frottement piste pour la boule 
-f_quille = 0.5;              %coeff frottement piste pour les quilles
+f_quille = 3;              %coeff frottement piste pour les quilles
 
 %%%Collision
 k_Boule_Quille=10000;         %raideur du ressort de contact boule - quille
@@ -69,8 +67,8 @@ y_quille = spline(x_pos_quille,y_pos_quille,x_quille);
 %% Variables d'intégration
 %%%Temporel
 %N=1e4;                          %Nb intégrations
-% t_init=0;                       %temps de début de simulation (s)
-% t_tot=4;                        %temps de fin de simulation (s)
+t_init=0;                       %temps de début de simulation (s)
+t_tot=4;                        %temps de fin de simulation (s)
 dt=(t_tot-t_init)/N;            %pas de temps (s)
 t=linspace(t_init,t_tot,N);     %vecteur des instants calculés
 

@@ -1,22 +1,25 @@
-function [] = Affichage_Interface(h, N, imagesPerSec, time)
+function [] = Affichage_Interface( N, imagesPerSec)
 
-global Nb_q X_q Dir_q X_b R_b
+global Nb_q X_q Dir_q X_b R_b t_tot
 
-Nb_images = imagesPerSec * (time(2) - time(1));      %nombre d'images au total
+Nb_images = imagesPerSec * t_tot;      %nombre d'images au total
 pas_Affichage = floor(N/Nb_images)+1;             %pas d'iteration lors de l'affichage de la simulation
 
-%set(h, 'OuterPosition', [-11.026, -3.585384615384615, 50, 30]); % [xLeft, yBottom, width, height]
+h = figure('units','normalized','outerposition',[0 0 1 1]);
  
-for i=3000:pas_Affichage:N
+for i=1:pas_Affichage:N
    
     DrawBall(X_b(:,i), R_b);
     hold on
     for j=1:Nb_q
-%         DrawCylinder(X_q(:,i,j),Dir_q(:,i,j));             %NORMAL display
-        DrawCylinderDebug(X_q(:,i,j), X_q(:,i,j+Nb_q));     %DEBUG HERE
+        DrawCylinder(X_q(:,i,j),Dir_q(:,i,j));             %NORMAL display
+%         DrawCylinderDebug(X_q(:,i,j), X_q(:,i,j+Nb_q));     %DEBUG HERE
     end
-    set(h,'xlim',[0 25],'ylim',[-12 12],'zlim', [0 25]);
-
+    
+    xlim([0 25]);
+    ylim([-12 12]);
+    zlim([0 25]);
+    
    %% Focus sur les quilles
 %     set(gca, 'CameraPosition', [10, 4, 5]);
 %     set(gca, 'CameraTarget', [18.1,0,0]);
